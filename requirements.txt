@@ -1,1 +1,4 @@
 tweepy
+pandas
+numpy
+textblob
