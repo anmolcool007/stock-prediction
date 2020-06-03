@@ -20,4 +20,5 @@ df1['pos_vader'] = df['pos_vader']
 df1['neg_vader'] = df['neg_vader']
 df1['neu_vader'] = df['neu_vader']
 df1['comp_vader'] = df['comp_vader']
-df.to_csv("MSFT_with_vader_sentiment.csv")
+print(df1)
+df1.to_csv("MSFT_with_vader_sentiment.csv")
