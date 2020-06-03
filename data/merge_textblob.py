@@ -17,4 +17,4 @@ df1 = pd.read_csv("MSFT_complete.csv")
 
 #new column in stock data (sentiment score column)
 df1['textblob_sentiment'] = df['textblob_sentiment']
-df.to_csv("MSFT_with_sentiment.csv")
+df1.to_csv("MSFT_with_sentiment.csv")
