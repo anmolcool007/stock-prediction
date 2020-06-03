@@ -8,4 +8,4 @@ print("---calculating sentiment using textblob---")
 df['textblob_sentiment'] = df['tweet'].apply(lambda x:TextBlob(x).sentiment.polarity)
 
 print("---saving in csv file---")
-df.to_csv("sentiment_score.csv")
+df.to_csv("sentiment_score_textblob.csv")

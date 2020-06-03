@@ -1,6 +1,6 @@
 import pandas as pd
 
-df = pd.read_csv("sentiment_score.csv")
+df = pd.read_csv("../sentiment_score/sentiment_score_vader.csv")
 #take only date and sentiment score from the dataframe
 df = df.loc[:, df.columns.intersection(['date','textblob_sentiment'])]
 
