@@ -27,8 +27,8 @@ df['date'] = new_dates
 df['tweet'] = new_tweets
 
 #
-df['tweet'] = df['tweet'].apply(lambda x: ' '.join([word for word in x.split() if word not in (stop)]))
-df['tweet'] = df['tweet'].apply(lambda x: ' '.join([ps.stem(word) for word in x.split()]))
+#df['tweet'] = df['tweet'].apply(lambda x: ' '.join([word for word in x.split() if word not in (stop)]))
+#df['tweet'] = df['tweet'].apply(lambda x: ' '.join([ps.stem(word) for word in x.split()]))
 
 
 df.to_csv("merged.csv")
