@@ -22,17 +22,22 @@ print("---Removing Links---")
 df['tweet'] = df['tweet'].apply(lambda x: re.sub(r"http\S+", "", x))
 df['tweet'] = df['tweet'].apply(lambda x: re.sub(r"www.+", "", x))
 
+print("---Removing Hastags/Usernames---")
+df['tweet'] = df['tweet'].apply(lambda x: re.sub(r"#", "", x))
+df['tweet'] = df['tweet'].apply(lambda x: re.sub(r"@+", "", x))
+
+
 print("---Removing Stop Words ---")
 df['tweet'] = df['tweet'].apply(lambda x: ' '.join([word for word in x.split() if word not in (stop)]))
 
 print("---Stemming---")
 df['tweet'] = df['tweet'].apply(lambda x: ' '.join([ps.stem(word) for word in x.split()]))
 
-print("---Lemmetizing---")
-df['tweet'] = df['tweet'].apply(lambda x: ' '.join([lmtzr.lemmatize(word,'v') for word in x.split()]))
+# print("---Lemmetizing---")
+# df['tweet'] = df['tweet'].apply(lambda x: ' '.join([lmtzr.lemmatize(word,'v') for word in x.split()]))
 
-print("--Spelling Checker---")
-df['tweet'] = df['tweet'].apply(lambda x: TextBlob(x).correct())
+# print("--Spelling Checker---")
+# df['tweet'] = df['tweet'].apply(lambda x: TextBlob(x).correct())
 
 print("---Saving to CSV file---")
 df.to_csv("processed_tweets.csv")
