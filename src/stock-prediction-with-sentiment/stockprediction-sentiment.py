@@ -13,17 +13,17 @@ from sklearn.metrics import r2_score
 from sklearn.preprocessing import MinMaxScaler
 sc = MinMaxScaler()
 
-df = pd.read_csv("../../data/MSFT_complete.csv",parse_dates=True,index_col="Date")
+df = pd.read_csv("../../data/microsoft_verified_users/verified_MSFT-textblob.csv",parse_dates=True,index_col="Date")
 df = df[1563:]
 del df["Unnamed: 0"]
+del df["Unnamed: 0.1"]
 df.drop(columns=['Volume','Adj Close'],inplace=True)
-df.columns = [['open', 'high', 'low','close',]]
+df.columns = [['open', 'high', 'low','close','sentiment']]
 print("---dataframe head---")
 print(df.head())
 
 print("--scaling data---")
-data = sc.fit_transform(df)
-
+data = sc.fit_transform(df) 
 train_ind = int(0.6*len(df))
 val_ind = train_ind + int(0.2*len(df))
 
@@ -34,10 +34,10 @@ test = data[val_ind:]
 print("--shapes--")
 print("train,test,val",train.shape, test.shape, val.shape)
 
-xtrain,ytrain,xval,yval,xtest,ytest = train[:,:4],train[:,3],val[:,:4],val[:,3],test[:,:4],test[:,3]
+xtrain,ytrain,xval,yval,xtest,ytest = train[:,:5],train[:,3],val[:,:5],val[:,3],test[:,:5],test[:,3]
 
 lookback = 60
-n_features = 4
+n_features = 5
 train_len = len(xtrain) - lookback
 test_len = len(xtest) - lookback
 val_len = len(xval) - lookback
@@ -88,11 +88,11 @@ history = model.fit(x_train,y_train, epochs = 100, batch_size=30,
           shuffle = False, callbacks=[earlystop])
 print("end:",time()-start)
 
-model.save("./models/modelx.h5")
+model.save("./models/model1.h5")
 loss = history.history
 plt.plot(loss['loss'])
 plt.plot(loss['val_loss'])
-plt.savefig("./plots/lossx.jpg")
+plt.savefig("./plots/loss1.jpg")
 plt.show()
 y_pred = model.predict(x_test)
 
@@ -100,7 +100,7 @@ y_pred = model.predict(x_test)
 plt.figure(figsize=(20,10))
 plt.plot( y_test, '.-', color='red', label='Real values', alpha=0.5)
 plt.plot( y_pred, '.-', color='blue', label='Predicted values', alpha=1)
-plt.savefig("./plots/resultx.jpg")
+plt.savefig("./plots/result1.jpg")
 plt.show()
 
 print("r2_score:",r2_score(y_pred,y_test))
