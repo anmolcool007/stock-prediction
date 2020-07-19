@@ -70,10 +70,9 @@ print("x_val", x_val.shape)
 print("y_val", y_val.shape)
 
 model = Sequential() 
-model.add(LSTM(400,input_shape = (lookback, n_features), return_sequences=True))
-model.add(Dropout(0.2))
-model.add(LSTM(600))
-model.add(Dropout(0.2))
+model.add(LSTM(600,input_shape = (lookback, n_features), return_sequences=True))
+model.add(LSTM(700))
+model.add(Dropout(0.15))
 model.add(Dense(1))
 print(model.summary())
 
@@ -87,11 +86,11 @@ history = model.fit(x_train,y_train, epochs = 100, batch_size=30,
           shuffle = False, callbacks=[earlystop])
 print("end:",time()-start)
 
-model.save("./models/model-vadercase5.h5")
+model.save("./models/model-vadercase6.h5")
 loss = history.history
 plt.plot(loss['loss'])
 plt.plot(loss['val_loss'])
-plt.savefig("./plots/loss-vadercase5.jpg")
+plt.savefig("./plots/loss-vadercase6.jpg")
 plt.show()
 y_pred = model.predict(x_test)
 print("r2_score:",r2_score(y_pred,y_test))
@@ -100,7 +99,7 @@ print("r2_score:",r2_score(y_pred,y_test))
 plt.figure(figsize=(20,10))
 plt.plot( y_test, '.-', color='red', label='Real values', alpha=0.5)
 plt.plot( y_pred, '.-', color='blue', label='Predicted values', alpha=1)
-plt.savefig("./plots/result-vadercase5.jpg")
+plt.savefig("./plots/result-vadercase6.jpg")
 plt.show()
 
 
