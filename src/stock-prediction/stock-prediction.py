@@ -14,7 +14,7 @@ from sklearn.preprocessing import MinMaxScaler
 sc = MinMaxScaler()
 
 df = pd.read_csv("../../data/MSFT_complete.csv",parse_dates=True,index_col="Date")
-df = df[1563:]
+#df = df[1563:]
 del df["Unnamed: 0"]
 df.drop(columns=['Volume','Adj Close'],inplace=True)
 df.columns = [['open', 'high', 'low','close',]]
@@ -70,12 +70,11 @@ print("x_val", x_val.shape)
 print("y_val", y_val.shape)
 
 model = Sequential() 
-model.add(LSTM(120,input_shape = (lookback, n_features), return_sequences=True))
-model.add(Dropout(0.22))
-model.add(LSTM(100))
-model.add(Dropout(0.215))
+model.add(LSTM(400,input_shape = (lookback, n_features), return_sequences=True))
+model.add(Dropout(0.2))
+model.add(LSTM(600))
+model.add(Dropout(0.2))
 model.add(Dense(1))
-
 print(model.summary())
 
 model.compile(loss = 'mse', optimizer = 'adam')
@@ -88,22 +87,23 @@ history = model.fit(x_train,y_train, epochs = 100, batch_size=30,
           shuffle = False, callbacks=[earlystop])
 print("end:",time()-start)
 
-model.save("./models/modelx.h5")
+model.save("./models/model-vadercase5.h5")
 loss = history.history
 plt.plot(loss['loss'])
 plt.plot(loss['val_loss'])
-plt.savefig("./plots/lossx.jpg")
+plt.savefig("./plots/loss-vadercase5.jpg")
 plt.show()
 y_pred = model.predict(x_test)
+print("r2_score:",r2_score(y_pred,y_test))
 
 
 plt.figure(figsize=(20,10))
 plt.plot( y_test, '.-', color='red', label='Real values', alpha=0.5)
 plt.plot( y_pred, '.-', color='blue', label='Predicted values', alpha=1)
-plt.savefig("./plots/resultx.jpg")
+plt.savefig("./plots/result-vadercase5.jpg")
 plt.show()
 
-print("r2_score:",r2_score(y_pred,y_test))
+
 
 
 

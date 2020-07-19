@@ -13,8 +13,9 @@ from sklearn.metrics import r2_score
 from sklearn.preprocessing import MinMaxScaler
 sc = MinMaxScaler()
 
-df = pd.read_csv("../../data/microsoft_verified_users/verified_MSFT-textblob.csv",parse_dates=True,index_col="Date")
-df = df[1563:]
+df = pd.read_csv("../../data/microsoft_verified_users/verified_MSFT-vader.csv",parse_dates=True,index_col="Date")
+# df = df[1563:]
+print(df.corr()['Close'])
 del df["Unnamed: 0"]
 del df["Unnamed: 0.1"]
 df.drop(columns=['Volume','Adj Close'],inplace=True)
@@ -69,13 +70,12 @@ for i in range(val_len):
 print("x_val", x_val.shape)
 print("y_val", y_val.shape)
 
-model = Sequential() 
-model.add(LSTM(120,input_shape = (lookback, n_features), return_sequences=True))
-model.add(Dropout(0.22))
-model.add(LSTM(100))
-model.add(Dropout(0.215))
+model = Sequential()  
+model.add(LSTM(400,input_shape = (lookback, n_features), return_sequences=True))
+model.add(Dropout(0.2))
+model.add(LSTM(600))
+model.add(Dropout(0.2))
 model.add(Dense(1))
-
 print(model.summary())
 
 model.compile(loss = 'mse', optimizer = 'adam')
@@ -86,21 +86,23 @@ print("start:",0)
 history = model.fit(x_train,y_train, epochs = 100, batch_size=30, 
           validation_data=(x_val,y_val),verbose = 1, 
           shuffle = False, callbacks=[earlystop])
-print("end:",time()-start)
+print("endtime:",time()-start)
 
-model.save("./models/model1.h5")
+model.save("./models/model_vader5.h5")
 loss = history.history
 plt.plot(loss['loss'])
 plt.plot(loss['val_loss'])
-plt.savefig("./plots/loss1.jpg")
+plt.savefig("./plots/loss_vader5.jpg")
 plt.show()
+# model = load_model("./models/model_vader1.h5")
 y_pred = model.predict(x_test)
+# print(model.summary())
 
 
 plt.figure(figsize=(20,10))
 plt.plot( y_test, '.-', color='red', label='Real values', alpha=0.5)
 plt.plot( y_pred, '.-', color='blue', label='Predicted values', alpha=1)
-plt.savefig("./plots/result1.jpg")
+plt.savefig("./plots/result_vader5.jpg")
 plt.show()
 
 print("r2_score:",r2_score(y_pred,y_test))
