@@ -61,3 +61,26 @@ $ pip install <packages from requirements.txt>
 - Define Model 
 - Set hyperparameters
 - Log the output
+
+## Result
+
+### Graph  
+- Oriinal closing price : Blue
+- Only LSTM based predicted pprice : Orange
+- LSTM with sentiment based predicted pprice : Green
+
+<img src="https://github.com/anmolcool007/stock-prediction/blob/master/closing-price_comparision.png" title="Results">
+
+### Comparision
+
+| Metric | LSTM | LSTM + Sentiment |
+| --- | --- | --- |
+| **R2 Score** | 0.883 | 0.987 |
+| **MSE** | 0.0021304 | 0.0002669 |
+
+---
+
+## Contributors
+
+- <a href="https://github.com/Yash5044" target="_blank">Yash Chaubey</a>
+- <a href="https://github.com/anmolcool007" target="_blank">Anmol Gupta</a>
