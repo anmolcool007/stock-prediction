@@ -37,7 +37,16 @@ $ <env_name>\Scripts\activate
 $ pip install <packages from requirements.txt>
 ```
 ---
-
+## Technology Stack
+- Python
+- Numpy
+- Pandas
+- Matplotlib
+- Tensorflow
+- Keras
+- Twitter API
+- Google API
+- 
 ## Components
 
 ### Tweet Scraping
@@ -51,7 +60,7 @@ $ pip install <packages from requirements.txt>
 - Removing mentions and "#" from the word
 
 ### Sentiment Analysis
-- Use of pre-trained open source sentiment analyzer <a href="https://github.com/cjhutto/vaderSentiment" target="_blank">Scrapy</a>.
+- Use of pre-trained open source sentiment analyzer <a href="https://github.com/cjhutto/vaderSentiment" target="_blank">Vader</a>.
 - Filling void using interpolation.
 ---
 
