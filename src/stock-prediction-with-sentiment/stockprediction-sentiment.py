@@ -1,5 +1,7 @@
 import pandas as pd
 import numpy as np
+import matplotlib
+matplotlib.use("TkAgg")
 import matplotlib.pyplot as plt
 import tensorflow as tf
 from time import time
@@ -71,9 +73,8 @@ print("x_val", x_val.shape)
 print("y_val", y_val.shape)
 
 model = Sequential()  
-model.add(LSTM(400,input_shape = (lookback, n_features), return_sequences=True))
-model.add(Dropout(0.2))
-model.add(LSTM(600))
+model.add(LSTM(200,input_shape = (lookback, n_features), return_sequences=True))
+model.add(LSTM(500))
 model.add(Dropout(0.2))
 model.add(Dense(1))
 print(model.summary())
@@ -88,11 +89,11 @@ history = model.fit(x_train,y_train, epochs = 100, batch_size=30,
           shuffle = False, callbacks=[earlystop])
 print("endtime:",time()-start)
 
-model.save("./models/model_vader5.h5")
+model.save("./models/model_vader7.h5")
 loss = history.history
 plt.plot(loss['loss'])
 plt.plot(loss['val_loss'])
-plt.savefig("./plots/loss_vader5.jpg")
+plt.savefig("./plots/loss_vader7.jpg")
 plt.show()
 # model = load_model("./models/model_vader1.h5")
 y_pred = model.predict(x_test)
@@ -102,7 +103,7 @@ y_pred = model.predict(x_test)
 plt.figure(figsize=(20,10))
 plt.plot( y_test, '.-', color='red', label='Real values', alpha=0.5)
 plt.plot( y_pred, '.-', color='blue', label='Predicted values', alpha=1)
-plt.savefig("./plots/result_vader5.jpg")
+plt.savefig("./plots/result_vader7.jpg")
 plt.show()
 
 print("r2_score:",r2_score(y_pred,y_test))
