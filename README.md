@@ -46,7 +46,8 @@ $ pip install <packages from requirements.txt>
 - Keras
 - Twitter API
 - Google API
-- 
+- sklearn
+
 ## Components
 
 ### Tweet Scraping
