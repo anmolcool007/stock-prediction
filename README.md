@@ -1,4 +1,4 @@
-# stock-prediction [![Python Versions](https://img.shields.io/pypi/pyversions/yt2mp3.svg)](https://pypi.python.org/pypi/yt2mp3/) 
+# Stock-Prediction [![Python Versions](https://img.shields.io/pypi/pyversions/yt2mp3.svg)](https://pypi.python.org/pypi/yt2mp3/) 
 Twitter Sentiment Analysis to improve Stock Price Prediction using LSTM
 ## Description
 
