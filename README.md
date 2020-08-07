@@ -75,9 +75,9 @@ $ pip install <packages from requirements.txt>
 ## Result
 
 ### Graph  
-- Oriinal closing price : Blue
-- Only LSTM based predicted pprice : Orange
-- LSTM with sentiment based predicted pprice : Green
+- Original closing price : Blue
+- Only LSTM based predicted price : Orange
+- LSTM with sentiment based predicted price : Green
 
 <img src="https://github.com/anmolcool007/stock-prediction/blob/master/closing-price_comparision.png" title="Results">
 
